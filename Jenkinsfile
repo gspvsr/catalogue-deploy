@@ -9,12 +9,11 @@ pipeline {
             steps {
                 echo "Deploying..."
                 echo "Version from params: ${params.version}"
-                }
             }
         }
 
         stage ('Init'){
-            steps{
+            steps {
                 sh """
                 cd terraform
                 terraform init -reconfigure
@@ -22,17 +21,19 @@ pipeline {
             }
         }
     
-        stage ('plan'){
-            steps{}
+        stage ('Plan'){
+            steps {
                 sh """
                 cd terraform
                 terraform plan
                 """
+            }
         }
+    }
 
     post {
         always {
-            echo 'cleaning up workspace'
+            echo 'Cleaning up workspace'
             deleteDir()
         }
     }
