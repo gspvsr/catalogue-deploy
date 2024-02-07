@@ -14,30 +14,12 @@ pipeline {
                 echo "Version from params: ${params.version}"
             }
         }
-
-        stage('Init') {
-            steps {
-                sh """
-                cd terraform
-                terraform init -reconfigure
-                """
-            }
-        }
-
-        stage('Plan') {
-            steps {
-                sh """
-                cd terraform
-                terraform plan
-                """
-            }
-        }
-    }
-
+    }   
+    
     post {
         always {
             echo 'Cleaning up workspace'
             deleteDir()
         }
     }
-
+}
