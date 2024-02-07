@@ -17,23 +17,19 @@ pipeline {
 
         stage('Init') {
             steps {
-                script {
-                    sh """
-                    cd terraform
-                    terraform init -reconfigure
-                    """
-                }
+                sh """
+                cd terraform
+                terraform init -reconfigure
+                """
             }
         }
-    
+
         stage('Plan') {
             steps {
-                script {
-                    sh """
-                    cd terraform
-                    terraform plan
-                    """
-                }
+                sh """
+                cd terraform
+                terraform plan
+                """
             }
         }
     }
@@ -41,7 +37,7 @@ pipeline {
     post {
         always {
             echo 'Cleaning up workspace'
-            //deleteDir()
+            deleteDir()
         }
     }
-}
+
