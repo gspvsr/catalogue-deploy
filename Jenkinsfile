@@ -40,12 +40,13 @@ pipeline {
                     string(name: 'PERSON', defaultValue: 'Mr Jenkins', description: 'Who should I say hello to?')
                 }
             }
-
-         stage('Apply ') {
+        }
+        
+        stage('Apply') {
             steps {
                 sh """
                  cd terraform
-                 terraform apply -var="app_version=${params.version}"
+                 terraform apply -var="app_version=${params.version}" -auto-approve
                 """
             }
         } 
