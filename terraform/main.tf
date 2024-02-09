@@ -165,7 +165,7 @@ resource "aws_lb_listener_rule" "catalogue" {
   condition {
     host_header {
       # for DEV instance, it should be app-dev and for PROD it should be app-prod
-      values = ["${var.common_tags.Component}.app-${var.env}.${var.doamin_name}"]
+      values = ["${var.common_tags.Component}.app-${var.env}.${var.domain_name}"]
     }
   }
 }
