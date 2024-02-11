@@ -19,7 +19,7 @@ pipeline {
             steps{
                 sh """
                 cd terraform
-                terraform init -reconfigure
+                terraform init -backend-config=${perm.environment}/backend.tf -reconfigure
                 """
             }
         }
@@ -27,7 +27,7 @@ pipeline {
             steps{
                 sh """
                 cd terraform
-                terraform plan -var="app_version=${params.version}"
+                 terraform plan -var-file=${params.environment}/${params.environment}.tfvars -var="app_version=${params.version}" -var="env=${params.environment}"
                 """
             }
         }
@@ -49,7 +49,7 @@ pipeline {
             steps{
                 sh """
                 cd terraform
-                terraform apply -auto-approve -var="app_version=${params.version}"
+                terraform apply -var-file=${params.environment}/${params.environment}.tfvars -var="app_version=${params.version}" -var="env=${params.environment}" -auto-approve
                 """
             }
         }
